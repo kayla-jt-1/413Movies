@@ -8,7 +8,7 @@ using _413Movies.Models;
 namespace _413Movies.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220207222457_Initial")]
+    [Migration("20220211052641_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,15 +17,35 @@ namespace _413Movies.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.22");
 
+            modelBuilder.Entity("_413Movies.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Family"
+                        });
+                });
+
             modelBuilder.Entity("_413Movies.Models.MovieResponse", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER")
                         .HasMaxLength(35);
 
                     b.Property<string>("Director")
@@ -57,13 +77,15 @@ namespace _413Movies.Migrations
 
                     b.HasKey("MovieId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Responses");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
-                            Category = "Family",
+                            CategoryId = 1,
                             Director = "Hayao Miyazaki",
                             Edited = false,
                             Lent = "",
@@ -75,7 +97,7 @@ namespace _413Movies.Migrations
                         new
                         {
                             MovieId = 2,
-                            Category = "Family",
+                            CategoryId = 1,
                             Director = "Hayao Miyazaki",
                             Edited = false,
                             Lent = "",
@@ -87,7 +109,7 @@ namespace _413Movies.Migrations
                         new
                         {
                             MovieId = 3,
-                            Category = "Fantasy/Adventure",
+                            CategoryId = 1,
                             Director = "Hayao Miyazaki",
                             Edited = false,
                             Lent = "",
@@ -96,6 +118,15 @@ namespace _413Movies.Migrations
                             Title = "Porco Rosso",
                             Year = 1992
                         });
+                });
+
+            modelBuilder.Entity("_413Movies.Models.MovieResponse", b =>
+                {
+                    b.HasOne("_413Movies.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

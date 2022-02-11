@@ -12,11 +12,11 @@ namespace _413Movies.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private Context BlahContext { get; set; }
+        private Context daContext { get; set; }
         public HomeController(ILogger<HomeController> logger, Context SomeName)
         {
             _logger = logger;
-            BlahContext = SomeName;
+            daContext = SomeName;
         }
 
         public IActionResult Index()
@@ -41,8 +41,8 @@ namespace _413Movies.Controllers
         [HttpPost]
         public IActionResult MovieApp(MovieResponse movieResponse)
         {
-            BlahContext.Add(movieResponse);
-            BlahContext.SaveChanges();
+            daContext.Add(movieResponse);
+            daContext.SaveChanges();
             return View("Confirmation", movieResponse);
         }
 
@@ -50,6 +50,13 @@ namespace _413Movies.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult MovieLibrary()
+        {
+            var app = daContext.Responses.ToList();
+            return View(app);
         }
     }
 }

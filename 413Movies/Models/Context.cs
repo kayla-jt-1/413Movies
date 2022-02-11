@@ -14,14 +14,18 @@ namespace _413Movies.Models
             //leave blank for now
         }
         public DbSet<MovieResponse> Responses { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
+            mb.Entity<Category>().HasData(
+                new Category { CategoryId = 1, CategoryName = "Family" }
+                );
             mb.Entity<MovieResponse>().HasData(
                 new MovieResponse
                 {
                     MovieId = 1,
-                    Category = "Family",
+                    CategoryId = 1,
                     Title = "Howl's Moving Castle",
                     Year = 2004,
                     Director = "Hayao Miyazaki",
@@ -33,7 +37,7 @@ namespace _413Movies.Models
                 new MovieResponse
                 {
                     MovieId = 2,
-                    Category = "Family",
+                    CategoryId = 1,
                     Title = "Kiki's Delivery Service",
                     Year = 1989,
                     Director = "Hayao Miyazaki",
@@ -45,7 +49,7 @@ namespace _413Movies.Models
                 new MovieResponse
                 {
                     MovieId = 3,
-                    Category = "Fantasy/Adventure",
+                    CategoryId = 1,
                     Title = "Porco Rosso",
                     Year = 1992,
                     Director = "Hayao Miyazaki",

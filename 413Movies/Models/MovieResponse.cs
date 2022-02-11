@@ -14,7 +14,8 @@ namespace _413Movies.Models
         public int MovieId { get; set; } //Primary key
         [Required]
         [MaxLength(35)]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
