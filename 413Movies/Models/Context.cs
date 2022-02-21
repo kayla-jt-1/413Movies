@@ -19,7 +19,13 @@ namespace _413Movies.Models
         protected override void OnModelCreating(ModelBuilder mb)
         {
             mb.Entity<Category>().HasData(
-                new Category { CategoryId = 1, CategoryName = "Family" }
+                new Category { CategoryId = 1, CategoryName = "Family" },
+                new Category { CategoryId = 2, CategoryName = "Action/Adventure" },
+                new Category { CategoryId = 3, CategoryName = "Comedy" },
+                new Category { CategoryId = 4, CategoryName = "Drama" },
+                new Category { CategoryId = 5, CategoryName = "Horror/Suspense" },
+                new Category { CategoryId = 6, CategoryName = "Television" },
+                new Category { CategoryId = 7, CategoryName = "VHS" }
                 );
             mb.Entity<MovieResponse>().HasData(
                 new MovieResponse
@@ -49,7 +55,7 @@ namespace _413Movies.Models
                 new MovieResponse
                 {
                     MovieId = 3,
-                    CategoryId = 1,
+                    CategoryId = 2,
                     Title = "Porco Rosso",
                     Year = 1992,
                     Director = "Hayao Miyazaki",

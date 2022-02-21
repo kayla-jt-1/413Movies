@@ -17,10 +17,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            @foreach (var x in Model)
+        
+        @foreach (var x in Model)
             {
-                <td>@x.Category</td>
+            <tr>
+                <td>@x.Category.CategoryName</td>
                 <td>@x.Title</td>
                 <td>@x.Year</td>
                 <td>@x.Director</td>
@@ -28,7 +29,10 @@
                 <td>@x.Edited</td>
                 <td>@x.Lent</td>
                 <td>@x.Notes</td>
+                <td><a asp-controller="Home" asp-action="Edit" asp-route-movieId="@x.MovieId">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="Delete" asp-route-movieId="@x.MovieId">Delete</a></td>
+            </tr>
             }
-        </tr>
+
     </tbody>
 </table>

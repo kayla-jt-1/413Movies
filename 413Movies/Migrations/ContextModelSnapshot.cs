@@ -33,6 +33,36 @@ namespace _413Movies.Migrations
                         {
                             CategoryId = 1,
                             CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "VHS"
                         });
                 });
 
@@ -43,8 +73,7 @@ namespace _413Movies.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER")
-                        .HasMaxLength(35);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -107,7 +136,7 @@ namespace _413Movies.Migrations
                         new
                         {
                             MovieId = 3,
-                            CategoryId = 1,
+                            CategoryId = 2,
                             Director = "Hayao Miyazaki",
                             Edited = false,
                             Lent = "",

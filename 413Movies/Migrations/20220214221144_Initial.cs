@@ -25,7 +25,7 @@ namespace _413Movies.Migrations
                 {
                     MovieId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CategoryId = table.Column<int>(maxLength: 35, nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: false),
                     Year = table.Column<int>(nullable: false),
                     Director = table.Column<string>(maxLength: 35, nullable: false),
@@ -51,6 +51,36 @@ namespace _413Movies.Migrations
                 values: new object[] { 1, "Family" });
 
             migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[] { 2, "Action/Adventure" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[] { 3, "Comedy" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[] { 4, "Drama" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[] { 5, "Horror/Suspense" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[] { 6, "Television" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[] { 7, "VHS" });
+
+            migrationBuilder.InsertData(
                 table: "Responses",
                 columns: new[] { "MovieId", "CategoryId", "Director", "Edited", "Lent", "Notes", "Rating", "Title", "Year" },
                 values: new object[] { 1, 1, "Hayao Miyazaki", false, "", "", "PG", "Howl's Moving Castle", 2004 });
@@ -63,7 +93,7 @@ namespace _413Movies.Migrations
             migrationBuilder.InsertData(
                 table: "Responses",
                 columns: new[] { "MovieId", "CategoryId", "Director", "Edited", "Lent", "Notes", "Rating", "Title", "Year" },
-                values: new object[] { 3, 1, "Hayao Miyazaki", false, "", "", "PG", "Porco Rosso", 1992 });
+                values: new object[] { 3, 2, "Hayao Miyazaki", false, "", "", "PG", "Porco Rosso", 1992 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Responses_CategoryId",

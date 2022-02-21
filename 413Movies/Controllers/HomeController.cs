@@ -1,5 +1,6 @@
 ﻿using _413Movies.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,7 @@ namespace _413Movies.Controllers
         [HttpGet]
         public IActionResult MovieApp()
         {
+            ViewBag.Categories = daContext.Categories.ToList();
             return View();
         }
         [HttpPost]
@@ -55,8 +57,51 @@ namespace _413Movies.Controllers
         [HttpGet]
         public IActionResult MovieLibrary()
         {
-            var app = daContext.Responses.ToList();
+            var app = daContext.Responses
+                .Include(x => x.Category)
+                .ToList();
             return View(app);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int movieId)
+        {
+            var movie = daContext.Responses.Single(x => x.MovieId == movieId);
+            ViewBag.Categories = daContext.Categories.ToList();
+            return View("MovieApp", movie);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MovieResponse mr)
+        {
+            if (ModelState.IsValid)
+            {             
+                daContext.Update(mr);
+                daContext.SaveChanges();
+                return Redirect("MovieLibrary");
+            }
+            else //If invalid
+            {
+                ViewBag.Categories = daContext.Categories.ToList();
+                return View("MovieLibrary");
+            }
+
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int movieId)
+        {
+            var movie = daContext.Responses.Single(x => x.MovieId == movieId);
+            ViewBag.Categories = daContext.Categories.ToList();
+            return View("Delete", movie);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(MovieResponse mr)
+        {
+            daContext.Responses.Remove(mr);
+            daContext.SaveChanges();
+            return Redirect("MovieLibrary");
         }
     }
 }
